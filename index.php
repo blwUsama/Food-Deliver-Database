@@ -13,7 +13,7 @@
 
     <div id="parent_div">
       <div id="vertical_navigation">
-        <a class="navigation_item" href="departments.html"> Parteneri </a>
+        <a class="navigation_item" href="partners.html"> Parteneri </a>
         <a class="navigation_item"> Produse </a>
         <a class="navigation_item"> Comenzi </a>
         <a class="navigation_item"> Livratori </a>

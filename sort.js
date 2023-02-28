@@ -8,7 +8,7 @@ let table = document.getElementById("table");
 
 button.addEventListener("click", function() {
     let xhr = new XMLHttpRequest();
-    url = "departments.php?column="+column.value+"&order="+order.value;
+    url = "partners.php?column="+column.value+"&order="+order.value;
 
     xhr.open("GET", url);
     xhr.send();

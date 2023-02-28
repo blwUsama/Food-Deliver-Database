@@ -212,8 +212,8 @@ id_comanda INT,
 id_produs INT,
 cantitate INT NOT NULL,
 PRIMARY KEY(id_produs, id_comanda),
-FOREIGN KEY(id_produs) REFERENCES produs(id_produs),
-FOREIGN KEY(id_comanda) REFERENCES comanda(id_comanda)
+FOREIGN KEY(id_produs) REFERENCES produs(id_produs) ON DELETE CASCADE,
+FOREIGN KEY(id_comanda) REFERENCES comanda(id_comanda) ON DELETE CASCADE
 );
 
 insert into lista_produse VALUES

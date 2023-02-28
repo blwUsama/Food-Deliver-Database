@@ -20,6 +20,13 @@ p{
     width: calc(100%);
     padding: 10px;
 }
+
+#delete_icon
+{
+    height: 20px;
+    width: 20px;
+}
+
 .navigation_item
 {
     color :white;
