@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css">
+    
+  </head>
+
+  <body>
+    <nav>
+      <img id="logo" src="images/panda.png">
+      <img id="text" src="images/foodpanda.png">
+    </nav>  
+
+    <div id="parent_div">
+      <div id="vertical_navigation">
+        <a class="navigation_item" href="departments.php"> Parteneri </a>
+        <a class="navigation_item"> Produse </a>
+        <a class="navigation_item"> Comenzi </a>
+        <a class="navigation_item"> Livratori </a>
+        <a class="navigation_item"> Flote </a>
+        <a class="navigation_item"> Clienti </a>
+        <a class="navigation_item"> Tickete </a>
+        <a class="navigation_item"> Angajati </a>
+        <a class="navigation_item"> Departamente </a>
+      </div>
+
+      <div id="results_area">
+
+        <label for='columns'> sorteaza dupa: </label>
+        <select name='columns' id='columns'>
+          
+          <option value='id_partener'> id partener </option>
+          <option value='nume'> nume </option>
+          <option value='prenume'> prenume </option>
+          <option value='oras'> oras </option>
+          <option value='adresa'> adresa </option>
+          <option value='telefon'> telefon </option>
+          <option value='ora_deschidere'> ora deschidere </option>
+          <option value='ora_inchidere'> ora inchidere </option>
+        </select>
+
+        <select id='order'>
+          <option value="ASC"> crescator </option>
+          <option value="DESC"> descrescator </option>
+        </select>
+        <button id='search_button'> cauta </button>
+        <table>
+          <thead>
+            <tr>
+              <th> id </th>
+              <th> nume </th>
+              <th> oras </th>
+              <th> adresa </th>
+              <th> telefon </th>
+              <th> ora deschidere </th>
+              <th> ora inchidere </th>
+            </tr>
+          </thead>
+          <tbody id="table">
+          </tbody>
+        </table>
+        <p id="delete"> </p>
+
+        <script src='index.js'></script>
+      </div> 
+    </div>
+  </body>
+      </html>
+

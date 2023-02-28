@@ -1,0 +1,69 @@
+p{
+    color: red;
+}
+#parent_div
+{
+}
+
+#vertical_navigation
+{
+    background-color: rgb(71, 68, 68);
+    height: 100vh;
+    width: 150px;
+    float: left;
+}
+
+#results_area
+{
+    background-color: rgb(236, 222, 204);
+    height: 100vh;
+    width: calc(100%);
+    padding: 10px;
+}
+.navigation_item
+{
+    color :white;
+    display:block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.navigation_item:hover
+{
+    color: rgb(212, 29, 142);
+}
+
+nav
+{
+    height:100px;
+    background-color:  rgb(71, 68, 68);
+}
+
+#logo
+{
+    margin-left: 20px;
+    width: 100px;
+    height: 100px
+}
+
+#text
+{
+    width: 400px;
+    height: 80px;
+}
+
+table, th, td {
+    border: 1px solid black;
+  }
+
+th
+{
+    background-color: rgb(243, 61, 173);
+}
+
+td
+{
+    background-color: white;
+    padding: 5px;
+}
