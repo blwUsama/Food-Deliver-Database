@@ -3,38 +3,38 @@ CREATE DATABASE IF NOT EXISTS foodpanda;
 USE foodpanda;
 
 -- Tabela Partener:
-CREATE TABLE IF NOT EXISTS partener(
-id_partener INT NOT NULL AUTO_INCREMENT,
-nume VARCHAR(50) NOT NULL,
-oras VARCHAR(50) NOT NULL,
-adresa VARCHAR(200) NOT NULL,
-telefon INT(10) zerofill NOT NULL ,
-ora_deschidere TIME NOT NULL,
-ora_inchidere TIME NOT NULL,
-PRIMARY KEY(id_partener),
-CHECK(telefon > 99999999)
+CREATE TABLE IF NOT EXISTS partner(
+partner_id INT NOT NULL AUTO_INCREMENT,
+name VARCHAR(50) NOT NULL,
+city VARCHAR(50) NOT NULL,
+address VARCHAR(200) NOT NULL,
+phone INT(10) zerofill NOT NULL ,
+opening_time TIME NOT NULL,
+closing_time TIME NOT NULL,
+PRIMARY KEY(partner_id),
+CHECK(phone > 99999999)
 );
 
-INSERT INTO partener(nume, oras, adresa, telefon, ora_deschidere, ora_inchidere) VALUES
+INSERT INTO partner(name, city, address, phone, opening_time, closing_time) VALUES
 ('KFC', 'Bucuresti', 'Strada Puiului nr.10', 0734567899, '10:00', '22:00'),
 ('Shaormeria Kogalniceanu', 'Bucuresti', 'Strada Mihail Kogalniceanu nr 23', 0712489670, '08:00', '08:00'), 
 ('La Placinte', 'Bucuresti', 'Bulevardul Doina Cornea 4E', 0756207005, '10:00', '22:00'),
 ('Ciorbarie', 'Bucuresti', 'Calea Dorobanti 73', 0725067447, '11:00', '21:00'),
 ('Pizza Hut', 'Bucuresti', 'Bulevardul Regina Elisabeta 15-19', 0740121903,'10:00', '22:00');
 
-CREATE TABLE IF NOT EXISTS produs(
-id_produs int AUTO_INCREMENT,
-id_partener int,
-nume VARCHAR(100) NOT NULL,
-pret FLOAT NOT NULL,
-gramaj int,
-PRIMARY KEY(id_produs),
-FOREIGN KEY(id_partener) REFERENCES partener(id_partener)
+CREATE TABLE IF NOT EXISTS product(
+product_id int AUTO_INCREMENT,
+partner_id int,
+name VARCHAR(100) NOT NULL,
+price FLOAT NOT NULL,
+weight int,
+PRIMARY KEY(product_id),
+FOREIGN KEY(partner_id) REFERENCES partner(partner_id)
   ON DELETE CASCADE ON UPDATE CASCADE,
-CHECK(pret >= 0)
+CHECK(price >= 0)
 );
 
-INSERT INTO produs(id_partener, nume, pret, gramaj) VALUES
+INSERT INTO product(partner_id, name, price, weight) VALUES
 (1, 'hot booster', 5.5, 125),
 (1, 'crispy sandwich', 6, 130),
 (1, 'snack box', 13, NULL),
@@ -51,39 +51,39 @@ INSERT INTO produs(id_partener, nume, pret, gramaj) VALUES
 (5, 'pizza europeana medie', 35.5, 300),
 (5, 'pizza california mare', 45, 450);
 
-CREATE TABLE flota(
-CNP_manager BIGINT UNSIGNED, -- folosesc BIGINT in loc de VARCHAR(13) pentru a economisi spatiu, BIGINT 
-							 -- fiind pe 8 bytes iar varchar(13) pe 13, si pentru a asigura valori numerice in CNP
-nume_flota VARCHAR(50) UNIQUE NOT NULL,
-nume_manager VARCHAR(50) NOT NULL,
-prenume_manager VARCHAR(100) NOT NULL,
-telefon INT(10) zerofill NOT NULL,
-data_infiintare DATE NOT NULL,
-PRIMARY KEY(CNP_manager),
-CHECK(CNP_manager >= 1000000000000 AND CNP_manager < 10000000000000),
-CHECK(telefon >= 100000000) --
+CREATE TABLE fleet(
+manager_CNP BIGINT UNSIGNED, -- i use BIGINT instead of VARCHAR(13) to save space (8 bytes instead of 13 per CNP)
+							               -- this also ensures we only have numerical values in this field
+fleet_name VARCHAR(50) UNIQUE NOT NULL,
+manager_name VARCHAR(50) NOT NULL,
+manager_surname VARCHAR(100) NOT NULL,
+phone INT(10) zerofill NOT NULL,
+creation_date DATE NOT NULL,
+PRIMARY KEY(manager_CNP),
+CHECK(manager_CNP >= 1000000000000 AND manager_CNP < 10000000000000),
+CHECK(phone >= 100000000) --
 );
 
-INSERT INTO flota VALUES
+INSERT INTO fleet VALUES
 (1940420464795, 'PANDAWANS SRL', 'Popa', 'Alin', 0794856720, '2018-04-25'),
 (1871203393845, 'FAST WHEELS DELIVERY SA', 'Stan', 'Mihai', 0759642873, '2019-01-12'),
 (1890529276052, 'TU COMANZI NOI VARSAM SRL', 'Girip', 'Florentin Mihai', 0722454906, '2016-12-12');
 
-CREATE TABLE IF NOT EXISTS livrator(
-CNP_livrator BIGINT UNSIGNED,
-CNP_manager BIGINT UNSIGNED NOT NULL,
-nume VARCHAR(50) NOT NULL,
-prenume VARCHAR(100) NOT NULL,
-vehicul ENUM('bicicleta', 'motocicleta', 'masina') NOT NULL,
-data_inscriere date NOT NULL,
-data_demisie date,
-PRIMARY KEY(CNP_livrator),
-CHECK(CNP_livrator >= 1000000000000 AND CNP_livrator < 10000000000000),
-FOREIGN KEY(CNP_manager) REFERENCES flota(CNP_manager)
+CREATE TABLE IF NOT EXISTS courier(
+courier_CNP BIGINT UNSIGNED,
+manager_CNP BIGINT UNSIGNED NOT NULL,
+name VARCHAR(50) NOT NULL,
+surname VARCHAR(100) NOT NULL,
+vehicle ENUM('bicicleta', 'motocicleta', 'masina') NOT NULL,
+registration_date date NOT NULL,
+resignation_date date,
+PRIMARY KEY(courier_CNP),
+CHECK(courier_CNP >= 1000000000000 AND courier_CNP < 10000000000000),
+FOREIGN KEY(manager_CNP) REFERENCES fleet(manager_CNP)
   ON DELETE cascade ON UPDATE cascade
 );
 
-INSERT INTO livrator (CNP_livrator, CNP_manager, nume, prenume, vehicul, data_inscriere) VALUES
+INSERT INTO courier (courier_CNP, manager_CNP, name, surname, vehicle, registration_date) VALUES
 (2940625117515, 1940420464795, 'Luminita', 'Calin', 1, '2018-07-29'),
 (5000221447182, 1940420464795, 'Dobre', 'Marius', 'motocicleta', '2019-10-21'),
 (1960619242151, 1940420464795, 'Manolache', 'Carmen', 3, '2018-12-03'),
@@ -96,33 +96,33 @@ INSERT INTO livrator (CNP_livrator, CNP_manager, nume, prenume, vehicul, data_in
 (5051003331744, 1890529276052, 'Buse', 'Dorin', 2, '2018-10-18'),
 (2930324281024, 1890529276052, 'Pop', 'Dragos', 'motocicleta', '2019-02-25');
 
-CREATE TABLE IF NOT EXISTS departament(
-id_departament INT AUTO_INCREMENT,
-nume VARCHAR(50),
-oras VARCHAR(25),
-adresa VARCHAR(100),
-PRIMARY KEY(id_departament)
+CREATE TABLE IF NOT EXISTS department(
+department_id INT AUTO_INCREMENT,
+name VARCHAR(50),
+city VARCHAR(25),
+address VARCHAR(100),
+PRIMARY KEY(department_id)
 );
 
-INSERT INTO departament(nume, oras, adresa) VALUES
+INSERT INTO department(name, city, address) VALUES
 ('Logistica', 'Bucuresti', 'Str. Gheorghe Palade, nr. 22'),
 ('Customer Support', 'Cluj', 'Str. Fericirii, nr. 80'),
 ('Marketing', 'Bucuresti', 'Str. Gheorghe Palade, nr. 22'),
 ('Human Resources', 'Bucuresti', 'Str. Gheorghe Palade, nr. 22');
 
-CREATE TABLE IF NOT EXISTS angajat(
+CREATE TABLE IF NOT EXISTS employee(
 CNP BIGINT UNSIGNED,
-id_departament INT NOT NULL,
-nume VARCHAR(50) NOT NULL,
-prenume VARCHAR(100) NOT NULL,
-data_angajarii DATE NOT NULL,
-data_demisiei DATE,
+department_id INT NOT NULL,
+name VARCHAR(50) NOT NULL,
+surname VARCHAR(100) NOT NULL,
+registration_date DATE NOT NULL,
+resignation_date DATE,
 PRIMARY KEY(CNP),
-FOREIGN KEY(id_departament) REFERENCES departament(id_departament),
+FOREIGN KEY(department_id) REFERENCES department(department_id),
 CHECK(CNP >= 1000000000000 AND CNP < 10000000000000)
 );
 
-INSERT INTO angajat VALUES
+INSERT INTO employee VALUES
 (2890428304955, 1, 'Toma', 'Eugen', '2016-02-10', '2020-03-09'),
 (6050702414663, 1, 'Vlasceanu', 'Stefania', '2020-03-20', NULL),
 
@@ -134,13 +134,13 @@ INSERT INTO angajat VALUES
 (5050107374443, 3, 'Chirila', 'Nadia', '2017-03-22', NULL);
 
 CREATE TABLE client(
-telefon INT(10) zerofill,
-nume VARCHAR(50) NOT NULL,
-prenume VARCHAR(100) NOT NULL,
+phone INT(10) zerofill,
+name VARCHAR(50) NOT NULL,
+surname VARCHAR(100) NOT NULL,
 email VARCHAR(50),
-numar_card VARCHAR(16),
-PRIMARY KEY(telefon),
-CHECK(telefon > 99999999)
+card_number VARCHAR(16),
+PRIMARY KEY(phone),
+CHECK(phone > 99999999)
 );
 
 INSERT INTO client VALUES
@@ -152,37 +152,37 @@ INSERT INTO client VALUES
 (0782815988, 'Chirita', 'Monica', 'sandu.amanda@yahoo.com', 4556260554608729);
 
 CREATE TABLE ticket(
-id_ticket INT AUTO_INCREMENT ,
-telefon_client INT(10) zerofill NOT NULL,
-CNP_angajat BIGINT UNSIGNED NOT NULL,
-durata_prim_raspuns INT UNSIGNED NOT NULL, -- acesti timpi se vor masura in secunde 
-durata_rezolvare BIGINT UNSIGNED NOT NULL,
-satisfactie ENUM('foarte nemultumit', 'nemultumit', 'neutru', 'multumit', 'foarte multumit'),
-PRIMARY KEY(id_ticket),
-FOREIGN KEY(telefon_client) REFERENCES client(telefon),
-FOREIGN KEY(CNP_angajat) REFERENCES angajat(CNP)
+ticket_id INT AUTO_INCREMENT ,
+client_phone INT(10) zerofill NOT NULL,
+employee_CNP BIGINT UNSIGNED NOT NULL,
+first_answer_time INT UNSIGNED NOT NULL, -- these times will be measured in seconds
+solve_time BIGINT UNSIGNED NOT NULL,
+satisfaction ENUM('foarte nemultumit', 'nemultumit', 'neutru', 'multumit', 'foarte multumit'),
+PRIMARY KEY(ticket_id),
+FOREIGN KEY(client_phone) REFERENCES client(phone),
+FOREIGN KEY(employee_CNP) REFERENCES employee(CNP)
 );
 
-INSERT INTO ticket(telefon_client, CNP_angajat, durata_prim_raspuns, durata_rezolvare, satisfactie) VALUES
+INSERT INTO ticket(client_phone, employee_CNP, first_answer_time, solve_time, satisfaction) VALUES
 (0731811481, 6050907289261, 5, 300, 4),
 (0756243678, 6050907289261, 4, 180, 5),
 (0769278398, 2950929406237, 14, 500, 2),
 (0748151900, 1930415417460, 2, 150, 5);
 
-CREATE TABLE comanda(
-id_comanda INT AUTO_INCREMENT,
-telefon_client INT(10) zerofill,
-adresa VARCHAR(200) NOT NULL,
-timp_plasare TIME NOT NULL,
-timp_estimat_livrare TIME NOT NULL,
-timp_livrare TIME NOT NULL,
-tip_plata ENUM('cash', 'card') NOT NULL,
+CREATE TABLE orders(
+order_id INT AUTO_INCREMENT,
+client_phone INT(10) zerofill,
+address VARCHAR(200) NOT NULL,
+order_time TIME NOT NULL,
+estimated_delivery_time TIME NOT NULL,
+delivery_time TIME NOT NULL,
+payment_type ENUM('cash', 'card') NOT NULL,
 status ENUM('livrata', 'anulata') NOT NULL,
-PRIMARY KEY(id_comanda),
-FOREIGN KEY(telefon_client) REFERENCES client(telefon)
+PRIMARY KEY(order_id),
+FOREIGN KEY(client_phone) REFERENCES client(phone)
 );
 
-INSERT INTO comanda(telefon_client, adresa, timp_plasare, timp_estimat_livrare, timp_livrare, tip_plata, status) VALUES
+INSERT INTO orders(client_phone, address, order_time, estimated_delivery_time, delivery_time, payment_type, status) VALUES
 (0731811481, 'Str. Grivita 93', '20:13', '20:33', '20:40', 'card', 'livrata'),
 (0748151900, 'Str, Hateg 10 bl.N2 sc.1 ap.10', '17:45', '18:00', '18:00', 'card', 'anulata'),
 (0751981418, 'Str. Carausilor nr.4-6', '16:22', '16:40', '17:00', 'cash', 'livrata'),
@@ -190,16 +190,16 @@ INSERT INTO comanda(telefon_client, adresa, timp_plasare, timp_estimat_livrare, 
 (0731811481, 'Str. Stefan Cel Mare nr.26', '21:09', '21:30', '21:32', 2, 'livrata'),
 (0748151900, 'Str, Hateg 10 bl.N2 sc.1 ap.10', '20:22', '20:45', '20:50', 'cash', 'livrata'); 
 
-CREATE TABLE istoric_comenzi(
-id_comanda INT,
-CNP_livrator BIGINT UNSIGNED,
-profit_livrator FLOAT NOT NULL,
-PRIMARY KEY(id_comanda, CNP_livrator),
-FOREIGN KEY(id_comanda) REFERENCES comanda(id_comanda),
-FOREIGN KEY(CNP_livrator) REFERENCES livrator(CNP_livrator)
+CREATE TABLE order_history(
+order_id INT,
+courier_CNP BIGINT UNSIGNED,
+courier_profit FLOAT NOT NULL,
+PRIMARY KEY(order_id, courier_CNP),
+FOREIGN KEY(order_id) REFERENCES orders(order_id),
+FOREIGN KEY(courier_CNP) REFERENCES courier(courier_CNP)
 );
 
-INSERT INTO istoric_comenzi VALUES
+INSERT INTO order_history VALUES
 (1, 2930324281024, 4.30),
 (2, 1900504132009, 4),
 (3, 5000311342697, 3.80),
@@ -207,16 +207,16 @@ INSERT INTO istoric_comenzi VALUES
 (5, 5000221447182, 4.30),
 (6, 1960619242151, 4.50);
 
-CREATE TABLE lista_produse(
-id_comanda INT,
-id_produs INT,
-cantitate INT NOT NULL,
-PRIMARY KEY(id_produs, id_comanda),
-FOREIGN KEY(id_produs) REFERENCES produs(id_produs) ON DELETE CASCADE,
-FOREIGN KEY(id_comanda) REFERENCES comanda(id_comanda) ON DELETE CASCADE
+CREATE TABLE product_list(
+order_id INT,
+product_id INT,
+quantity INT NOT NULL,
+PRIMARY KEY(product_id, order_id),
+FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
+FOREIGN KEY(order_id) REFERENCES orders(order_id) ON DELETE CASCADE
 );
 
-insert into lista_produse VALUES
+insert into product_list VALUES
 (1, 1, 2),
 (1, 2, 2),
 (1, 3, 1),

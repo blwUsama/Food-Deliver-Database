@@ -21,7 +21,7 @@ p{
     padding: 10px;
 }
 
-#delete_icon
+#delete_icon, #edit_icon
 {
     height: 20px;
     width: 20px;

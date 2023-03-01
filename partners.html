@@ -13,48 +13,47 @@
 
     <div id="parent_div">
       <div id="vertical_navigation">
-        <a class="navigation_item" href="partners.php"> Parteneri </a>
-        <a class="navigation_item"> Produse </a>
-        <a class="navigation_item"> Comenzi </a>
-        <a class="navigation_item"> Livratori </a>
-        <a class="navigation_item"> Flote </a>
-        <a class="navigation_item"> Clienti </a>
-        <a class="navigation_item"> Tickete </a>
-        <a class="navigation_item"> Angajati </a>
-        <a class="navigation_item"> Departamente </a>
+        <a class="navigation_item" href="partners.php"> Partners </a>
+        <a class="navigation_item"> Products </a>
+        <a class="navigation_item"> Orders </a>
+        <a class="navigation_item"> Couriers </a>
+        <a class="navigation_item"> Fleets </a>
+        <a class="navigation_item"> Clients </a>
+        <a class="navigation_item"> Tickets </a>
+        <a class="navigation_item"> Employees </a>
+        <a class="navigation_item"> Departments </a>
       </div>
 
       <div id="results_area">
 
-        <label for='columns'> sorteaza dupa: </label>
+        <label for='columns'> sort based on: </label>
         <select name='columns' id='columns'>
           
-          <option value='id_partener'> id partener </option>
-          <option value='nume'> nume </option>
-          <option value='prenume'> prenume </option>
-          <option value='oras'> oras </option>
-          <option value='adresa'> adresa </option>
-          <option value='telefon'> telefon </option>
-          <option value='ora_deschidere'> ora deschidere </option>
-          <option value='ora_inchidere'> ora inchidere </option>
+          <option value='partner_id'> partner id </option>
+          <option value='name'> name </option>
+          <option value='city'> city </option>
+          <option value='address'> address </option>
+          <option value='phone'>  phone number </option>
+          <option value='opening_time'> opening time </option>
+          <option value='closing_time'> closing time </option>
         </select>
 
         <select id='order'>
-          <option value="ASC"> crescator </option>
-          <option value="DESC"> descrescator </option>
+          <option value="ASC"> ascending </option>
+          <option value="DESC"> descending </option>
         </select>
-        <button id='search_button'> cauta </button>
+        <button id='search_button'> search </button>
         <table>
           <thead>
             <tr>
               <th> id </th>
-              <th> nume </th>
-              <th> oras </th>
-              <th> adresa </th>
-              <th> telefon </th>
-              <th> ora deschidere </th>
-              <th> ora inchidere </th>
-              <th> actiune </th>
+              <th> name </th>
+              <th> city </th>
+              <th> address </th>
+              <th> phone </th>
+              <th> opening time </th>
+              <th> closing time </th>
+              <th> action </th>
             </tr>
           </thead>
           <tbody id="table">

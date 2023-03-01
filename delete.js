@@ -1,5 +1,5 @@
 function delete_row(table, id){
-    if(confirm("Are you sure you wish to delete entry " + id + "?"))
+    if(confirm("Are you sure you wish to delete entry ?"))
     {
         xhr = new XMLHttpRequest();
         url = "delete.php?table=" + table + "&id=" + id;

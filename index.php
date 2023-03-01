@@ -13,15 +13,15 @@
 
     <div id="parent_div">
       <div id="vertical_navigation">
-        <a class="navigation_item" href="partners.html"> Parteneri </a>
-        <a class="navigation_item"> Produse </a>
-        <a class="navigation_item"> Comenzi </a>
-        <a class="navigation_item"> Livratori </a>
-        <a class="navigation_item"> Flote </a>
-        <a class="navigation_item"> Clienti </a>
-        <a class="navigation_item"> Tickete </a>
-        <a class="navigation_item"> Angajati </a>
-        <a class="navigation_item"> Departamente </a>
+        <a class="navigation_item" href="partners.html"> Partners </a>
+        <a class="navigation_item"> Products </a>
+        <a class="navigation_item"> Orders </a>
+        <a class="navigation_item"> Couriers </a>
+        <a class="navigation_item"> Fleets </a>
+        <a class="navigation_item"> Clients </a>
+        <a class="navigation_item"> Tickets </a>
+        <a class="navigation_item"> Employees </a>
+        <a class="navigation_item"> Departments </a>
       </div>
 
       <div id="results_area">
