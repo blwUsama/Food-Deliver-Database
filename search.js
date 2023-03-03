@@ -3,11 +3,14 @@ console.log("wazap");
 
 let columns = document.getElementById("columns");
 let order = document.getElementById("order");
-let button = document.getElementById("search_button");
+let searchButton = document.getElementById("search_button");
+let addButton = document.getElementById("add_entry_button");
 let table_head = document.getElementById("table_head");
 let table_body = document.getElementById("table_body");
 
-button.addEventListener("click", function() {
+searchButton.addEventListener("click", function() {
+    addButton.style.visibility = 'visible';
+
     let htmlHeader = "";                                                   //the following block of code is responsible for rendering the table header
     for(let i = 0; i < columns.length; i++)
     {
@@ -25,7 +28,6 @@ button.addEventListener("click", function() {
     xhr.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200)
         {
-            console.log("checkpoint");
             let results = xhr.responseText;
             table_body.innerHTML = results;
         }

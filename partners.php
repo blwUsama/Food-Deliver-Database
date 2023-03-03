@@ -19,10 +19,8 @@ while($partner = $result_partners->fetch_assoc())
   echo "<td>" . $partner['phone'] . "</td>";
   echo "<td>" . $partner['opening_time'] . "</td>";
   echo "<td>" . $partner['closing_time'] . "</td>";
-  echo "<td>  <button onclick='delete_row(\"partner\", " . $partner['partner_id'] . ")'> 
-                <img id=\"delete_icon\" src='images/delete_icon.png'> </button> 
-              <button class='edit_button' data-id='" . $partner['partner_id'] . "'> 
-                <img id='edit_icon' onclick='this.parentElement.click()' src='images/edit_icon.png'> </button>
+  echo "<td>  <button class='delete_button'> <img id='delete_icon' onclick='this.parentElement.click()' src='images/delete_icon.png'> </button> 
+              <button class='edit_button'> <img id='edit_icon' onclick='this.parentElement.click()' src='images/edit_icon.png'> </button>
         </td>";
   echo "</tr>";
   echo "</table>";
