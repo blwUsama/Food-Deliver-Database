@@ -1,46 +1,3 @@
-p{
-    color: red;
-}
-#parent_div
-{
-}
-
-#vertical_navigation
-{
-    background-color: rgb(71, 68, 68);
-    height: 100vh;
-    width: 150px;
-    float: left;
-}
-
-#results_area
-{
-    background-color: rgb(236, 222, 204);
-    height: 100vh;
-    width: calc(100%);
-    padding: 10px;
-}
-
-#delete_icon, #edit_icon
-{
-    height: 20px;
-    width: 20px;
-}
-
-.navigation_item
-{
-    color :white;
-    display:block;
-    text-align: center;
-    margin-top: 5px;
-    cursor: pointer;
-}
-
-.navigation_item:hover
-{
-    color: rgb(212, 29, 142);
-}
-
 nav
 {
     height:100px;
@@ -58,6 +15,54 @@ nav
 {
     width: 400px;
     height: 80px;
+    position: absolute;
+    margin-top: 20px;
+}
+
+#parent_div
+{
+    display: flex;
+}
+
+#vertical_navigation
+{
+    background-color: rgb(71, 68, 68);
+    height: 100vh;
+    width: 150px;
+
+}
+
+
+.navigation_item
+{
+    color :white;
+    display:block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.navigation_item:hover
+{
+    color: rgb(212, 29, 142);
+}
+
+
+#results_area
+{
+    background-color: rgb(236, 222, 204);
+    height: 100vh;
+    /* width: calc(100% - 150px); */
+    /* margin-left: 150px; */
+    padding: 10px;
+    overflow-x : auto;
+    flex: 1;
+}
+
+#delete_icon, #edit_icon, #check_icon, #cross_icon
+{
+    height: 20px;
+    width: 20px;
 }
 
 table, th, td {
@@ -73,4 +78,9 @@ td
 {
     background-color: white;
     padding: 5px;
+}
+
+table{
+
+    font-size: 13px;
 }
