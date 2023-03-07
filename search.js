@@ -7,6 +7,10 @@ let searchButton = document.getElementById("search_button");
 let addButton = document.getElementById("add_entry_button");
 let table_head = document.getElementById("table_head");
 let table_body = document.getElementById("table_body");
+let SQLtable = document.getElementById("SQLtable").value;
+let searchBar = document.getElementById("search_bar");
+
+console.log("search bar value: " + searchBar.value)
 
 searchButton.addEventListener("click", function() {
     addButton.style.visibility = 'visible';
@@ -20,7 +24,7 @@ searchButton.addEventListener("click", function() {
     table_head.innerHTML = htmlHeader;
 
     let xhr = new XMLHttpRequest();                                        //the following block of code is responsible for rendering the table body
-    url = "partners.php?column="+columns.value+"&order="+order.value;
+    url = "../tableGen.php?table="+SQLtable+"&column="+columns.value+"&order="+order.value+"&searchPattern="+searchBar.value;
 
     xhr.open("GET", url);
     xhr.send();
@@ -35,4 +39,7 @@ searchButton.addEventListener("click", function() {
 
 })
 
-
+searchBar.addEventListener('keypress', function (event){
+    if(event.key == "Enter")
+        searchButton.click();
+})

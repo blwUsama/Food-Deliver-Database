@@ -118,7 +118,8 @@ surname VARCHAR(100) NOT NULL,
 registration_date DATE NOT NULL,
 resignation_date DATE,
 PRIMARY KEY(CNP),
-FOREIGN KEY(department_id) REFERENCES department(department_id),
+FOREIGN KEY(department_id) REFERENCES department(department_id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
 CHECK(CNP >= 1000000000000 AND CNP < 10000000000000)
 );
 
@@ -159,8 +160,10 @@ first_answer_time INT UNSIGNED NOT NULL, -- these times will be measured in seco
 solve_time BIGINT UNSIGNED NOT NULL,
 satisfaction ENUM('foarte nemultumit', 'nemultumit', 'neutru', 'multumit', 'foarte multumit'),
 PRIMARY KEY(ticket_id),
-FOREIGN KEY(client_phone) REFERENCES client(phone),
+FOREIGN KEY(client_phone) REFERENCES client(phone)
+  ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(employee_CNP) REFERENCES employee(CNP)
+ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO ticket(client_phone, employee_CNP, first_answer_time, solve_time, satisfaction) VALUES
@@ -180,6 +183,7 @@ payment_type ENUM('cash', 'card') NOT NULL,
 status ENUM('livrata', 'anulata') NOT NULL,
 PRIMARY KEY(order_id),
 FOREIGN KEY(client_phone) REFERENCES client(phone)
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO orders(client_phone, address, order_time, estimated_delivery_time, delivery_time, payment_type, status) VALUES
@@ -195,8 +199,10 @@ order_id INT,
 courier_CNP BIGINT UNSIGNED,
 courier_profit FLOAT NOT NULL,
 PRIMARY KEY(order_id, courier_CNP),
-FOREIGN KEY(order_id) REFERENCES orders(order_id),
+FOREIGN KEY(order_id) REFERENCES orders(order_id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(courier_CNP) REFERENCES courier(courier_CNP)
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO order_history VALUES
@@ -212,8 +218,10 @@ order_id INT,
 product_id INT,
 quantity INT NOT NULL,
 PRIMARY KEY(product_id, order_id),
-FOREIGN KEY(product_id) REFERENCES product(product_id) ON DELETE CASCADE,
-FOREIGN KEY(order_id) REFERENCES orders(order_id) ON DELETE CASCADE
+FOREIGN KEY(product_id) REFERENCES product(product_id) 
+  ON DELETE CASCADE,
+FOREIGN KEY(order_id) REFERENCES orders(order_id) 
+  ON DELETE CASCADE
 );
 
 insert into product_list VALUES

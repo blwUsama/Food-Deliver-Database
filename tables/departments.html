@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../index.css">
+    
+  </head>
+
+  <body>
+    <input type="hidden" id="SQLtable" value="department"> 
+    <!-- this value specifies with which SQL table we'll be interacting -->
+    
+    <nav>
+      <img id="logo" src="../images/panda.png">
+      <img id="text" src="../images/foodpanda.png">
+    </nav>  
+
+    <div id="parent_div">
+      <div id="vertical_navigation">
+        <a class="navigation_item" href="partners.html"> Partners </a>
+        <a class="navigation_item" href="products.html"> Products </a>
+        <a class="navigation_item" href="orders.html"> Orders </a>
+        <a class="navigation_item" href="couriers.html"> Couriers </a>
+        <a class="navigation_item" href="fleets.html"> Fleets </a>
+        <a class="navigation_item" href="clients.html"> Clients </a>
+        <a class="navigation_item" href="tickets.html"> Tickets </a>
+        <a class="navigation_item" href="employees.html"> Employees </a>
+        <a class="navigation_item" href="departments.html"> Departments </a>
+      </div>
+
+      <div id="results_area">
+        <label for='columns'> sort based on: </label>
+
+        <select name='columns' id='columns'>
+          <option value='department_id'> id </option>
+          <option value='name'> name </option>
+          <option value='city'> city </option>
+          <option value='address'> address </option>
+        </select>
+
+        <select id='order'>
+          <option value="ASC"> ascending </option>
+          <option value="DESC"> descending </option>
+        </select>
+
+        <input id="search_bar" type="text" placeholder="search for:">
+
+        <button id='search_button'> search </button>
+
+        <br>
+
+        <div id="button_wrapper">
+          <button id="add_entry_button" style="visibility: hidden"> add entry </button>
+        </div>
+
+        <table id="HTMLtable">
+          <thead>
+            <tr id="table_head">
+
+            </tr>
+          </thead>
+          <tbody id="table_body">
+          </tbody>
+        </table>
+        <p id="delete"> </p>
+
+        <script src='../search.js'></script>
+        <script src="../editRow.js"></script>
+      </div> 
+    </div>
+  </body>
+</html>

@@ -8,9 +8,10 @@ function delete_row(row)
     if(confirm("are you sure you wish to delete entry?"))
     {
     let id = row.querySelector(".primary_key").innerHTML;
+    let id_field = columns[0].value;
     let SQLtable = document.getElementById("SQLtable").value;
 
-    let url = "delete.php?table=" + SQLtable + "&id=" + id;
+    let url = "../delete.php?table=" + SQLtable + "&id=" + id + "&id_field=" + id_field;
     xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.send()
@@ -37,8 +38,8 @@ function inputs2data(row, values)       // this function will be called anytime 
         // console.log("i = "+i+"  cells[i].innerHTML = "+cells[i].innerHTML);
         cells[i].innerHTML = values[i - primaryKeyCount];
     }
-    let htmlbuttons = "<button class='delete_button'> <img id='delete_icon' onclick='this.parentElement.click()' src='images/delete_icon.png'> </button>" +
-                      "<button class='edit_button'> <img id='edit_icon' onclick='this.parentElement.click()' src='images/edit_icon.png'> </button>";
+    let htmlbuttons = "<button class='delete_button'> <img id='delete_icon' onclick='this.parentElement.click()' src='../images/delete_icon.png'> </button>" +
+                      "<button class='edit_button'> <img id='edit_icon' onclick='this.parentElement.click()' src='../images/edit_icon.png'> </button>";
     cells[cells.length - 1].innerHTML = htmlbuttons;
     // console.log("finished inputs2data");
 }
@@ -49,11 +50,15 @@ function edit_row(row) //this function will be called on a row when the edit but
     let id = row.querySelector(".primary_key");
     for(let i = 1; i < cells.length - 1; i++ )
     {
-        let value = cells[i].innerHTML;
-        cells[i].innerHTML = "<input type='text' value='"+value+"' style='max-width: "+cells[i].offsetWidth+"px'>";
+        let value;
+        if(cells[i].innerHTML != 'NULL')
+        value = cells[i].innerHTML;
+        cells[i].innerHTML = "<input type='text' value='"+value+"' style='max-width: " + cells[i].offsetWidth + "px'>";
+
+
     }
-    let htmlbuttons = "<button class='cancel_edit'> <img id='cross_icon' onclick='this.parentElement.click()' src='images/cross.png'> </button>" +
-                      "<button class='confirm_edit'> <img id='check_icon' onclick='this.parentElement.click()' src='images/check_mark.png'> </button>";                    
+    let htmlbuttons = "<button class='cancel_edit'> <img id='cross_icon' onclick='this.parentElement.click()' src='../images/cross.png'> </button>" +
+                      "<button class='confirm_edit'> <img id='check_icon' onclick='this.parentElement.click()' src='../images/check_mark.png'> </button>";                    
     cells[cells.length - 1].innerHTML = htmlbuttons;
 }
 
@@ -92,11 +97,11 @@ function confirm_edit(row) // this function will be called to confirm an edit ac
     {
         dictionary[sqlColumns[i]] = sqlValues[i];
     }
-    dictionary['table'] = SQLtable; 
+    dictionary['table'] = SQLtable; //the last key value pair will represent the table in which we'll be modifying
 
     let json = JSON.stringify(dictionary);
     let xhr = new XMLHttpRequest();
-    let url = "edit.php";
+    let url = "../edit.php";
     xhr.open("POST", url);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(json);
@@ -142,6 +147,7 @@ function confirm_add(row)
         {
             inputs2data(row, sqlValues);
             console.log(this.responseText);
+            searchButton.click();
 
         }
     }
@@ -159,11 +165,12 @@ addButton.addEventListener("click", function(){  //this function will be called 
     {
         let cell = row.insertCell(i);
         cell.innerHTML = "<input type='text' style='max-width:" + header_cells[i].offsetWidth + "px'>";
+
     }
 
     let cell = row.insertCell(columns.length) //inserting the action buttons
-    cell.innerHTML =  "<button class='cancel_add'> <img id='cross_icon' onclick='this.parentElement.click()' src='images/cross.png'> </button>" +
-                      "<button class='confirm_add'> <img id='check_icon' onclick='this.parentElement.click()' src='images/check_mark.png'> </button>";   
+    cell.innerHTML =  "<button class='cancel_add'> <img id='cross_icon' onclick='this.parentElement.click()' src='../images/cross.png'> </button>" +
+                      "<button class='confirm_add'> <img id='check_icon' onclick='this.parentElement.click()' src='../images/check_mark.png'> </button>";   
 })
 
 table_body.addEventListener("click", function(event){

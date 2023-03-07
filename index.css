@@ -83,4 +83,10 @@ td
 table{
 
     font-size: 13px;
+    width : 100%;
+}
+
+#search_bar
+{
+    border-radius: 5px;
 }
